@@ -27,12 +27,34 @@ class MyApp extends StatelessWidget {
           secondary: Colors.deepOrange,
         ),
       ),
-      home: const SafeArea(
-        child: OrdersScreen(),
+      home: const ProductsOverviewScreen(),
+      routes: {
+        CartScreen.routeName:
+          (ctx) => const CartScreen(),
+        OrdersScreen.routeName:
+          (ctx) => const OrdersScreen(),
+        UserProductsScreen.routeName:
+          (ctx) => const UserProductsScreen(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == ProductDetailScreen.routeName) {
+          final productId = settings.arguments as String;
+          return MaterialPageRoute(
+            builder: (ctx) {
+              return ProductDetailScreen(
+                ProductsManager().findById(productId),
+              );
+            },
+          );
+        }
+        return null;
+      },
+      //home: const SafeArea(
+        //child: OrdersScreen(),
         //child: CartScreen(),
         //child: UserProductsScreen(),
         // child: ProductsOverviewScreen(),
-        ),
+        //),
       );
   }
 }
