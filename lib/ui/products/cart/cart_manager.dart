@@ -18,6 +18,10 @@ class CartManager {
     return _items.values.toList();
   }
 
+  Iterable<MapEntry<String, CartItem>> get productEntries {
+    return {..._items}.entries;
+  }
+
   double get totalAmount {
     var total = 0.0;
     _items.forEach((key, cartItem) {
