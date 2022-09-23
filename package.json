@@ -1,11 +1,9 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js" 
-    
+    "start": "nodemon server.js"
   },
   "author": "khanhb1910529",
   "license": "ISC",
@@ -15,5 +13,14 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimkhanh010101/kimkhanh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kimkhanh010101/kimkhanh/issues"
+  },
+  "homepage": "https://github.com/kimkhanh010101/kimkhanh#readme",
+  "description": ""
 }
