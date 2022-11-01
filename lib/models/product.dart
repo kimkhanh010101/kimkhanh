@@ -20,6 +20,7 @@ class Product {
   set isFavorite(bool newValue) {
     _isFavorite.value = newValue;
   }
+  
 
   bool get isFavorite {
     return _isFavorite.value;
@@ -44,6 +45,23 @@ class Product {
       price: price ?? this.price,
       imageUrl: imageUrl ?? this.imageUrl,
       isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'description': description,
+      'price': price,
+      'imageUrl': imageUrl,
+    };
+  }
+  static Product fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'],
+      title: json['title'],
+      description: json['description'],
+      price: json['price'],
+      imageUrl: json['imageUrl'],
     );
   }
 }
