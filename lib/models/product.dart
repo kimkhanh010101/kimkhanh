@@ -16,11 +16,9 @@ class Product {
     required this.imageUrl,
     isFavorite = false,
   }) : _isFavorite = ValueNotifier(isFavorite);
-
   set isFavorite(bool newValue) {
     _isFavorite.value = newValue;
   }
-  
 
   bool get isFavorite {
     return _isFavorite.value;
@@ -39,14 +37,14 @@ class Product {
     bool? isFavorite,
   }) {
     return Product(
-      id: id ?? this.id,
-      title: title ?? this.title,
-      description: description ?? this.description,
-      price: price ?? this.price,
-      imageUrl: imageUrl ?? this.imageUrl,
-      isFavorite: isFavorite ?? this.isFavorite,
-    );
+        id: id ?? this.id,
+        title: title ?? this.title,
+        description: description ?? this.description,
+        price: price ?? this.price,
+        imageUrl: imageUrl ?? this.imageUrl,
+        isFavorite: isFavorite ?? this.isFavorite);
   }
+
   Map<String, dynamic> toJson() {
     return {
       'title': title,
@@ -55,6 +53,7 @@ class Product {
       'imageUrl': imageUrl,
     };
   }
+
   static Product fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'],

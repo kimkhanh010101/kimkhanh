@@ -13,7 +13,6 @@ abstract class FirebaseService {
         _userId = authToken?.userId {
     databaseUrl = dotenv.env['FIREBASE_URL'];
   }
-
   set authToken(AuthToken? authToken) {
     _token = authToken?.token;
     _userId = authToken?.userId;

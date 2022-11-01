@@ -14,12 +14,10 @@ import 'ui/auth/auth_manager.dart';
 
 
 
-void main() async {
+Future<void> main() async {
   await dotenv.load();
   runApp(const MyApp());
 }
-
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 

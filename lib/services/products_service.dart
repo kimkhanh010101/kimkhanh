@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
 import '../models/product.dart';
 import '../models/auth_token.dart';
+
 import 'firebase_service.dart';
 
 class ProductsService extends FirebaseService {
@@ -12,25 +14,22 @@ class ProductsService extends FirebaseService {
 
     try {
       final filters =
-          filterByUser ? 'orderBy="creatorId"&equalIo="$userId"' : '';
-      final productsUrl =
+          filterByUser ? 'orderBy = "creatorId"&equalTo="$userId"' : '';
+      final productUrl =
           Uri.parse('$databaseUrl/products.json?auth=$token&$filters');
-      final response = await http.get(productsUrl);
-      final productsMap = json.decode(response.body) as Map<String, dynamic>;
-
-      if (response.statusCode != 200) {
-        print(productsMap['error']);
+      final respone = await http.get(productUrl);
+      final productMap = json.decode(respone.body) as Map<String, dynamic>;
+      if (respone.statusCode != 200) {
+        print(productMap['error']);
         return products;
       }
 
-      final userFavoritesUrl =
+      final userfavoritesUrl =
           Uri.parse('$databaseUrl/userFavorites/$userId.json?auth=$token');
+      final userfavoriteRespone = await http.get(userfavoritesUrl);
+      final userFavoritesMap = json.decode(userfavoriteRespone.body);
 
-      final userFavoritesResponse = await http.get(userFavoritesUrl);
-
-      final userFavoritesMap = json.decode(userFavoritesResponse.body);
-
-      productsMap.forEach((productId, product) {
+      productMap.forEach((productId, product) {
         final isFavorite = (userFavoritesMap == null)
             ? false
             : (userFavoritesMap[productId] ?? false);
@@ -44,8 +43,8 @@ class ProductsService extends FirebaseService {
       return products;
     } catch (error) {
       print(error);
+      return products;
     }
-    return products;
   }
 
   Future<Product?> addProduct(Product product) async {
