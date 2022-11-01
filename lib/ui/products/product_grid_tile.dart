@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import '../../models/product.dart';
 import '../cart/cart_manager.dart';
 import 'product_detail_screen.dart';
+import 'products_manager.dart';
 
 class ProductGridTile extends StatelessWidget {
   const ProductGridTile(
     this.product, {
     super.key,
   });
-
   final Product product;
 
   @override
@@ -18,7 +17,7 @@ class ProductGridTile extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
-        footer: builGridFooterbar(context),
+        footer: buildGridFooterBar(context),
         child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushNamed(
@@ -35,21 +34,20 @@ class ProductGridTile extends StatelessWidget {
     );
   }
 
-  Widget builGridFooterbar(BuildContext context) {
+  Widget buildGridFooterBar(BuildContext context) {
     return GridTileBar(
       backgroundColor: Colors.black87,
       leading: ValueListenableBuilder<bool>(
         valueListenable: product.isFavoriteListenable,
         builder: (ctx, isFavorite, child) {
           return IconButton(
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-            ),
-            color: Theme.of(context).colorScheme.secondary,
-            onPressed: () {
-              product.isFavorite = !isFavorite;
-            },
-          );
+              icon: Icon(
+                isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+              color: Theme.of(context).colorScheme.secondary,
+              onPressed: () {
+                ctx.read<ProductsManager>().toggleFavoriteStatus(product);
+              });
         },
       ),
       title: Text(
@@ -57,9 +55,7 @@ class ProductGridTile extends StatelessWidget {
         textAlign: TextAlign.center,
       ),
       trailing: IconButton(
-        icon: const Icon(
-          Icons.shopping_cart,
-        ),
+        icon: const Icon(Icons.shopping_cart),
         onPressed: () {
           final cart = context.read<CartManager>();
           cart.addItem(product);
