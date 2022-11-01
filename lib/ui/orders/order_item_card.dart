@@ -1,22 +1,17 @@
 import 'dart:math';
-
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart ';
 import 'package:intl/intl.dart';
-
-import '../../../models/order_item.dart';
+import '../../models/order_item.dart';
 
 class OrderItemCard extends StatefulWidget {
   final OrderItem order;
-
   const OrderItemCard(this.order, {super.key});
-
   @override
   State<OrderItemCard> createState() => _OrderItemCardState();
 }
 
 class _OrderItemCardState extends State<OrderItemCard> {
   var _expanded = false;
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -36,28 +31,28 @@ class _OrderItemCardState extends State<OrderItemCard> {
       height: min(widget.order.productCount * 20.0 + 10, 100),
       child: ListView(
         children: widget.order.products
-        .map(
-          (prod) => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                prod.title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+            .map(
+              (prod) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    prod.title,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '${prod.quantity}x \$${prod.price}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  )
+                ],
               ),
-              Text(
-                '${prod.quantity}x \$${prod.price}',
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
-              )
-            ],
-          ),
-        )
-        .toList(),
+            )
+            .toList(),
       ),
     );
   }
@@ -78,4 +73,4 @@ class _OrderItemCardState extends State<OrderItemCard> {
       ),
     );
   }
-}
+} 

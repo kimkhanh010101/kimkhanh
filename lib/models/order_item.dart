@@ -22,10 +22,11 @@ class OrderItem {
     double? amount,
     List<CartItem>? products,
     DateTime? dateTime,
+
   }) {
     return OrderItem(
       id: id ?? this.id,
-      amount: amount ?? this.amount,
+      amount: amount ?? this.amount, 
       products: products ?? this.products,
       dateTime: dateTime ?? this.dateTime,
     );

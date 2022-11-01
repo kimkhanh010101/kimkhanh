@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-
-import '../../../models/cart_item.dart';
+import 'package:provider/provider.dart';
+import '../../models/cart_item.dart';
 import '../shared/dialog_utils.dart';
+import 'cart_manager.dart';
 
-class CartItemCard extends StatelessWidget {
+class CartItemCart extends StatelessWidget {
   final String productId;
   final CartItem cardItem;
 
-  const CartItemCard({
+  const CartItemCart({
     required this.productId,
     required this.cardItem,
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -29,20 +29,24 @@ class CartItemCard extends StatelessWidget {
           Icons.delete,
           color: Colors.white,
           size: 40,
+          
         ),
       ),
       direction: DismissDirection.endToStart,
       confirmDismiss: (direction) {
         return showConfirmDialog(
-          context, 'Do you want to remove the item from the cart?',
+          context,
+          'Do you want to remove the item from the cart?',
         );
       },
       onDismissed: (direction) {
-        print('Cart item dismissed');
+        print('cart item dismissed');
+        context.read<CartManager>().removeItem(productId);
       },
       child: buildItemCard(),
     );
   }
+
   Widget buildItemCard() {
     return Card(
       margin: const EdgeInsets.symmetric(
